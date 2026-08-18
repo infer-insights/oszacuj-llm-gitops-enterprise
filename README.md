@@ -5,38 +5,56 @@ Secure Hybrid Infrastructure Automation using Azure Arc Flux v2 (GitOps) under Z
 # 🚀 Enterprise Hybrid Data Platform: MS Fabric, GitOps & Local LLM Analytics
 
 ## 📌 Project Overview
-This repository showcases the architectural design and security framework for a production-grade, hybrid analytics platform. The system ingests and analyzes millions of **real estate transaction prices in Poland** using an enterprise data stack. 
+This repository showcases the architectural design, security framework, and ongoing deployment of a production-grade, hybrid analytics platform. The system is designed to ingest and analyze millions of **real estate transaction prices in Poland** using an enterprise data stack. 
 
 The architecture bridges an on-premises **MS SQL Server** engine with **Microsoft Fabric (OneLake)** using the **GitOps (Flux v2)** pattern via **Azure Arc**, creating a secure pipeline for local data crunching and **Private Large Language Model (LLM)** semantic analysis.
 
-> 🔒 **Confidentiality Notice:** In compliance with corporate security standards and non-disclosure practices, the actual source code (automation scripts, sensitive variables, and manifests) resides in a secured, private repository. This public profile serves as an architectural blueprint and portfolio presentation.
----
-## 🏗️ Architectural Framework (How it works)
-The entire communication is strictly **outbound-only**. The local Linux server initiates a secure TLS tunnel to Microsoft Azure cloud. No firewall modifications or public IP exposures were required on the local site.
+> 🔒 **Confidentiality Notice:** In compliance with corporate security standards and non-disclosure practices, the actual source code (automation scripts, sensitive variables, and manifests) resides in a secured, private repository. This public profile serves as an architectural blueprint, project roadmap, and portfolio presentation.
 
-+------------------------------------------------------------------------+
-|                      ON-PREMISES / LOCAL NETWORK                       ||
-||  [ Linux Server ] --( Local Handshake )--> [ Local Unix Socket /22 ]   
-||
-|                                              ^               
-||         
-| (Outbound HTTPS / Port 443)                  |               
-||         v                                              |               
-||  [ Azure Arc Agent ] ----------------------------------+               
-||  (Pulls Flux manifests & executes scripts locally)                     
-|+-----------------------------------|------------------------------------+
-|| (Secure Encrypted Tunnel)v
-+------------------------------------------------------------------------+
-|                          MICROSOFT AZURE CLOUD                         
-||                                                                        
-||  [ Azure Arc Management ] <---> [ Microsoft Entra ID ]                 
-||                                 (Role-Based Access Control - RBAC)     
-|+-----------------------------------|------------------------------------+
-|| (Manifest Synchronization)
-v+------------------------------------------------------------------------+
-|                         SECURE GIT REPOSITORY                          ||                                                                        
-||  [ Private Infrastructure Repo ] <--- (Single Source of Truth)        |
-+------------------------------------------------------------------------+
+---
+
+## 🏗️ Architectural Framework (Target Architecture)
+
+The entire communication is strictly **outbound-only** via secure TLS tunnels. No inbound firewall modifications or public IP exposures were executed on the local site.
+
+```mermaid
+graph TD
+    subgraph ON_PREMISES_LOCAL_NETWORK [On-Premises / Local Network]
+        LS[Linux Server] -->|Local Unix Socket /22| SSH[Internal SSH Service]
+        AA[Azure Arc Agent] -->|Executes manifests locally| LS
+    end
+
+    subgraph MICROSOFT_AZURE_CLOUD [Microsoft Azure Cloud]
+        AM[Azure Arc Management] <--> ME[Microsoft Entra ID <br> Role-Based Access Control]
+    end
+
+    subgraph SECURE_GIT_REPOSITORY [Secure Repositories]
+        GR[Private Infrastructure Repo <br> Single Source of Truth]
+    end
+
+    %% Outbound Connections
+    AA -->|Outbound HTTPS / Port 443| AM
+    LS -->|Manifest Sync via 443| GR
+
+    %% Styling
+    style ON_PREMISES_LOCAL_NETWORK fill:#f9f9f9,stroke:#333,stroke-width:1px
+    style MICROSOFT_AZURE_CLOUD fill:#e1f5fe,stroke:#0288d1,stroke-width:1px
+    style SECURE_GIT_REPOSITORY fill:#efebe9,stroke:#5d4037,stroke-width:1px
+    style AA fill:#fff,stroke:#333,stroke-width:2px
+    style AM fill:#fff,stroke:#0288d1,stroke-width:2px
+    style GR fill:#fff,stroke:#5d4037,stroke-width:2px
+```
+
+---
+
+## 🛡️ Key Security & Enterprise Features
+
+* **Zero Inbound Ports (No Port 22 Exposed):** The local network perimeter firewall completely blocks incoming traffic. Port 22 (SSH) is strictly bound to the local interface and is unreachable from the public internet.
+* **GitOps Pattern (Flux v2):** The private Git repository serves as the *Single Source of Truth*. The Azure Arc Flux extension monitors code changes and automatically reconciles the state of the Linux machine. If configuration drift occurs (e.g., someone accidentally uninstalls Docker), Flux automatically fixes it within minutes.
+* **Identity-Driven Management:** Replaced legacy local root credentials with **Microsoft Entra ID (Azure AD) RBAC**. Access is granted dynamically via *Virtual Machine Administrator Login* roles, preventing credential theft.
+* **Automated Compliance:** Integrated Azure Governance policies to continuous-audit the machine state and alert on any unapproved local user accounts.
+
+---
 
 ## 📅 Project Roadmap & Implementation Phases (Sprint-by-Sprint)
 
@@ -71,3 +89,4 @@ This project is actively developed in iterative sprints. Below is the current st
 * **Operating System:** Linux (Ubuntu/RHEL Enterprise)
 * **Data & Fabric:** MS SQL Server 2022, Microsoft Fabric (OneLake), Power BI
 * **AI & Language:** Python (Pandas/PySpark), Ollama (Llama 3)
+
