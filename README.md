@@ -13,6 +13,7 @@ The architecture bridges an on-premises **MS SQL Server** engine with **Microsof
 ---
 ## 🏗️ Architectural Framework (How it works)
 The entire communication is strictly **outbound-only**. The local Linux server initiates a secure TLS tunnel to Microsoft Azure cloud. No firewall modifications or public IP exposures were required on the local site.
+
 +----------------------------------------------------------------------+
 |ON-PREMISES / LOCAL NETWORK                       
 ||                                                                        
