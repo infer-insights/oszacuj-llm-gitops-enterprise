@@ -18,7 +18,9 @@ The architecture bridges an on-premises **MS SQL Server** engine with **Microsof
 The entire communication is strictly **outbound-only** via secure TLS tunnels. No inbound firewall modifications or public IP exposures were executed on the local site.
 
 ```mermaid
-graph TD
+graph LR
+    %% Horizontal layout path configuration (Left-to-Right)
+    
     subgraph ON_PREM [On-Premises / Local Network]
         LS[Linux Server]
         AA[Azure Arc Agent]
