@@ -18,38 +18,45 @@ The architecture bridges an on-premises **MS SQL Server** engine with **Microsof
 The entire communication is strictly **outbound-only** via secure TLS tunnels. No inbound firewall modifications or public IP exposures were executed on the local site.
 
 ```mermaid
-graph LR
-    %% Horizontal layout path configuration (Left-to-Right)
-    
+graph TD
+    %% Vertical Top-Down Architecture Layout
+
+    %% TOP LAYER
+    subgraph REPOS [Secure Repositories]
+        GR[Private Infrastructure Repo <br> Single Source of Truth]
+    end
+
+    %% MIDDLE LAYER
     subgraph ON_PREM [On-Premises / Local Network]
         LS[Linux Server]
         AA[Azure Arc Agent]
         SSH[Internal SSH Service /22]
+        
         AA -->|Local Management| LS
         LS -->|Loopback Handshake| SSH
     end
 
+    %% BOTTOM LAYER
     subgraph AZURE [Microsoft Azure Cloud]
         AM[Azure Arc Management]
         ME[Microsoft Entra ID <br> Role-Based Access Control]
         AM <--> ME
     end
 
-    subgraph REPOS [Secure Repositories]
-        GR[Private Infrastructure Repo <br> Single Source of Truth]
-    end
-
-    %% Outbound connections tracking over Port 443
+    %% VERTICAL FLOW CONNECTIONS (Outbound Port 443 Only)
+    GR -->|Secure Manifest Sync / Port 443| LS
     AA -->|Outbound HTTPS / Port 443| AM
-    LS -->|Secure Manifest Sync / Port 443| GR
 
     %% Corporate Enterprise Color Grading
+    style REPOS fill:#efebe9,stroke:#5d4037,stroke-width:1px
     style ON_PREM fill:#f9f9f9,stroke:#333,stroke-width:1px
     style AZURE fill:#e1f5fe,stroke:#0288d1,stroke-width:1px
-    style REPOS fill:#efebe9,stroke:#5d4037,stroke-width:1px
+    
+    style GR fill:#fff,stroke:#5d4037,stroke-width:2px
+    style LS fill:#fff,stroke:#333,stroke-width:2px
     style AA fill:#fff,stroke:#333,stroke-width:2px
     style AM fill:#fff,stroke:#0288d1,stroke-width:2px
-    style GR fill:#fff,stroke:#5d4037,stroke-width:2px
+
 ```
 
 ---
