@@ -13,7 +13,7 @@ The architecture bridges an on-premises **MS SQL Server** engine with **Microsof
 ---
 ## 🏗️ Architectural Framework (How it works)
 The entire communication is strictly **outbound-only**. The local Linux server initiates a secure TLS tunnel to Microsoft Azure cloud. No firewall modifications or public IP exposures were required on the local site.
-+------------------------------------------------------------------------+
++----------------------------------------------------------------------+
 |ON-PREMISES / LOCAL NETWORK                       
 ||                                                                        
 ||[ Linux Server ] --( Local Handshake )--> [ Local Unix Socket /22 ]   
@@ -23,20 +23,20 @@ The entire communication is strictly **outbound-only**. The local Linux server i
 |v||               
 ||  [ Azure Arc Agent ] ----------------------------------+               
 ||  (Pulls Flux manifests & executes scripts locally)|
-+-----------------------------------|------------------------------------+
++-----------------------------------|----------------------------------+
 || (Secure Encrypted Tunnel)
-+------------------------------------------------------------------------+
++----------------------------------------------------------------------+
 |MICROSOFT AZURE CLOUD                     
 ||                                                                        
 ||[ Azure Arc Management ] <---> [ Microsoft Entra ID ]                 
 ||(Role-Based Access Control - RBAC)|
-+------------------------------------------------------------------------+
++----------------------------------------------------------------------+
 || (Manifest Synchronization) v
-+------------------------------------------------------------------------+
++----------------------------------------------------------------------+
 |SECURE GIT REPOSITORY|
 ||
 |  [ Private Infrastructure Repo ] <--- (Single Source of Truth)|
-+------------------------------------------------------------------------+
++----------------------------------------------------------------------+
 
 ## 📅 Project Roadmap & Implementation Phases (Sprint-by-Sprint)
 
