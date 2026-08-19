@@ -1,6 +1,6 @@
 # oszacuj-llm-gitops-enterprise
 
-Secure Hybrid Infrastructure Automation using Azure Arc Flux v2 (GitOps) under Zero Trust Network architecture
+Secure Hybrid Infrastructure Automation using Azure Arc Flux v2 (GitOps) supporting Zero Trust Network architecture
 
 # 🚀 Enterprise Hybrid Data Platform: MS Fabric, GitOps & Local LLM Analytics
 
