@@ -83,7 +83,7 @@ This project is actively developed in iterative sprints. Below is the current st
 ### 🟡 Phase 2: Relational Data Layer & Advanced SQL (IN PROGRESS)
 * [ ] **Database Provisioning:** Deploying MS SQL Server 2022 containerized engine on the hybrid machine via GitOps (Flux v2).
 * [ ] **Schema Design:** Designing the relational schema for Polish real estate transaction prices (Fact & Dimension tables).
-* [ ] **Advanced Analytics:** Implementing heavy-duty SQL features including Window Functions (ranking, moving averages) and Common Table Expressions (CTEs) for market anomaly detection.
+* [ ] **Advanced Analytics:** Implementing SQL features including Window Functions (ranking, moving averages) and Common Table Expressions (CTEs) for market anomaly detection.
 
 ### 🔵 Phase 3: Microsoft Fabric & Big Data Ingestion (PLANNED / alongside DP-600 preparation)
 * [ ] **Data Pipeline Orchestration:** Configure Microsoft Fabric Data Factory to ingest data from on-premises MS SQL to OneLake via secure outbound connectivity.
