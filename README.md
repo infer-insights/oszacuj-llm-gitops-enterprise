@@ -85,13 +85,13 @@ This project is actively developed in iterative sprints. Below is the current st
 * [ ] **Schema Design:** Designing the relational schema for Polish real estate transaction prices (Fact & Dimension tables).
 * [ ] **Advanced Analytics:** Implementing heavy-duty SQL features including Window Functions (ranking, moving averages) and Common Table Expressions (CTEs) for market anomaly detection.
 
-### 🔵 Phase 3: Microsoft Fabric & Big Data Ingestion (PLANNED / DP-600)
+### 🔵 Phase 3: Microsoft Fabric & Big Data Ingestion (PLANNED / alongside DP-600 preparation)
 * [ ] **Data Pipeline Orchestration:** Configure Microsoft Fabric Data Factory to ingest data from on-premises MS SQL to OneLake via secure outbound connectivity.
 * [ ] **Medallion Architecture:** Process raw real estate data from Bronze (Raw Delta) to Silver (Cleaned Spark Dataframes) and Gold (Reporting Star-Schema) layers.
 * [ ] **DirectLake Optimization:** Build highly performant Power BI semantic models utilizing Fabric's native DirectLake mode.
 
 ### 🔵 Phase 4: Local LLMOps & Semantic Analysis (PLANNED)
-* [ ] **On-Premises AI Deployment:** Run an insulated Ollama instance hosting open-source models (e.g., Llama 3) via local Docker containers.
+* [ ] **On-Premises AI Deployment:** Run an insulated Ollama instance hosting mid-sized open-source models (e.g., Mistral, Llama) using 4-bit mixed-precision quantization via local Docker containers.
 * [ ] **Privacy-Preserving Analytics:** Pass real estate statistical anomalies to the local model via Python for automatic narrative generation, ensuring data compliance without third-party cloud exposures.
 
 ---
