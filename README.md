@@ -5,7 +5,7 @@ Secure Hybrid Infrastructure Automation using Azure Arc Flux v2 (GitOps) support
 # 🚀 Enterprise Hybrid Data Platform: MS Fabric, GitOps & Local LLM Analytics
 
 ## 📌 Project Overview
-This repository showcases the architectural design, security framework, and ongoing deployment of a production-grade, hybrid analytics platform. The system is designed to ingest and analyze millions of **real estate transaction prices in Poland** using an enterprise data stack. 
+This repository showcases the architectural design, security framework, and ongoing deployment of a production-grade, hybrid analytics platform. The system is designed to ingest and analyze db **real estate transaction prices in selected region of Poland** using an enterprise data stack. 
 
 The architecture bridges an on-premises **MS SQL Server** engine with **Microsoft Fabric (OneLake)** using the **GitOps (Flux v2)** pattern via **Azure Arc**, creating a secure pipeline for local data crunching and **Private Large Language Model (LLM)** semantic analysis.
 
