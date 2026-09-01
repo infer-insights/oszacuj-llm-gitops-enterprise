@@ -81,7 +81,8 @@ This project is actively developed in iterative sprints. Below is the current st
 * [x] **Secure Enterprise Repositories:** Separated code into a hardened Private repository with strict `.gitignore` rules (blocking `.env`, keys, secrets) and configured this Public profile for architectural presentation.
 
 ### 🟡 Phase 2: Relational Data Layer & Advanced SQL (IN PROGRESS)
-* [ ] **Database Provisioning:** Deploying MS SQL Server 2022 containerized engine on the hybrid machine via GitOps (Flux v2).
+* [x] **Database Provisioning:** ** Deployed a multi-engine relational cluster (MS SQL Server 2022 Developer, PostgreSQL 16, and MySQL 8.0) via GitHub Actions CI/CD.
+      Engineered strict local loopback isolation for network security, with stateful database storage mapped onto an independent secondary data drive..
 * [ ] **Schema Design:** Designing the relational schema for Polish real estate transaction prices (Fact & Dimension tables).
 * [ ] **Advanced Analytics:** Implementing SQL features including Window Functions (ranking, moving averages) and Common Table Expressions (CTEs) for market anomaly detection.
 
